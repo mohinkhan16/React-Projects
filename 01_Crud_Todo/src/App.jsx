@@ -27,10 +27,10 @@ const App = () => {
         todos.map((todo) =>
           todo.id === editValue.id
             ? {
-                ...todo,
-                task: input.task,
-                description: input.description,
-              }
+              ...todo,
+              task: input.task,
+              description: input.description,
+            }
             : todo
         )
       );
@@ -69,30 +69,20 @@ const App = () => {
   };
 
 
- const totaltask = todos.length;
+  const totaltask = todos.length;
 
-const completedTask = todos.filter((t) => t.completed).length;
+  const completedTask = todos.filter((t) => t.completed).length;
 
-const pendingtask = totaltask - completedTask;
+  const pendingtask = totaltask - completedTask;
 
   return (
     <>
-    <div className="container mt-4">
-      <AddTodo
-        handleAdd={handleAdd}
-        editValue={editValue}
-      />
 
-      <ListTodo
-        todos={todos}
-        handleDelete={handleDelete}
-        handleEdit={handleEdit}
-        handleComplete={handleComplete}
-      />
-    </div>
-
-  <div className="container mt-4">
+      <div className="container mt-4">
         <div className="row g-3">
+          <div className="text-primary fw-bold fs-4 mb-3 border-bottom pb-2">
+            Todo-List
+          </div>
 
           <div className="col-md-4">
             <div className="card shadow-sm border-0">
@@ -139,10 +129,25 @@ const pendingtask = totaltask - completedTask;
         </div>
       </div>
 
+      <div className="container mt-4">
+        <AddTodo
+          handleAdd={handleAdd}
+          editValue={editValue}
+        />
+
+        <ListTodo
+          todos={todos}
+          handleDelete={handleDelete}
+          handleEdit={handleEdit}
+          handleComplete={handleComplete}
+        />
+      </div>
+
+
 
     </>
 
-    
+
   );
 };
 
