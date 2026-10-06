@@ -1,78 +1,79 @@
 import React, { useEffect, useState } from "react";
-import { Table, Button } from "react-bootstrap";
+import Table from "react-bootstrap/Table";
 import { getAllEmployee } from "../API/EmployeeApi";
-import Loading from "../ui/loading";
 
 const Employee = () => {
-  const [employees, setEmployees] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
+  const [employee, setEmployee] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-  const fetchEmployees = async () => {
-    try {
-      const data = await getAllEmployee();
+  const loadData = async () => {
+    const data = await getAllEmployee();
 
-      setEmployees(data);
-    } catch (error) {
-      setError(error.message);
-    } finally {
-      setLoading(false);
-    }
+    console.log("Employee Data:", data);
+
+    setEmployee(data);
   };
 
   useEffect(() => {
-    fetchEmployees();
+    loadData();
   }, []);
 
-  if (loading) {
-    return <Loading />;
-  }
-
-  if (error) {
-    return (
-      <div className="alert alert-danger">
-        {error}
-      </div>
-    );
-  }
-
   return (
-    <div>
-      <div className="d-flex justify-content-between align-items-center mb-4">
-        <h2 className="fw-bold">All Employees</h2>
+    <div className="container mt-4">
+      <h2 className="mb-4">Employee List</h2>
 
-        <Button variant="primary">
-          Add Employee
-        </Button>
-      </div>
-
-      <Table striped bordered hover responsive>
+      <Table
+        striped
+        bordered
+        hover
+        responsive
+        className="align-middle shadow-sm"
+      >
         <thead className="table-dark">
           <tr>
-            <th>Employee ID</th>
+            <th className="text-center">Sr. No</th>
             <th>Name</th>
+            <th>Emp ID</th>
             <th>Email</th>
-            <th>Designation</th>
+            <th>Department</th>
+            <th>Salary</th>
+            <th>Mobile</th>
           </tr>
         </thead>
 
         <tbody>
-          {employees.length > 0 ? (
-            employees.map((employee) => (
-              <tr key={employee._id}>
-                <td>{employee.emp_Id}</td>
-                <td>{employee.name}</td>
-                <td>{employee.email}</td>
-                <td>{employee.designation}</td>
-              </tr>
-            ))
-          ) : (
-            <tr>
-              <td colSpan="4" className="text-center">
-                No Employees Found
+          {employee.map((item, index) => (
+            <tr key={item._id}>
+              <td className="text-center fw-semibold">
+                {index + 1}
               </td>
+
+              <td className="fw-semibold">
+                {item.name}
+              </td>
+
+              <td>
+                <span className="badge bg-secondary">
+                  {item.emp_Id}
+                </span>
+              </td>
+
+              <td>{item.email}</td>
+
+              <td>
+                <span className="badge bg-info text-dark">
+                  {item.department}
+                </span>
+              </td>
+
+              <td className="fw-semibold">
+                ₹{item.salary}
+              </td>
+
+              <td>{item.mobile}</td>
             </tr>
-          )}
+          ))}
         </tbody>
       </Table>
     </div>

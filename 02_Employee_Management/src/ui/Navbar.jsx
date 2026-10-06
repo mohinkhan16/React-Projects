@@ -11,11 +11,11 @@ function NavbarComponent() {
 
         <Nav className="me-auto">
           <Nav.Link as={Link} to="/">
-            Home
+            Employee
           </Nav.Link>
 
-          <Nav.Link as={Link} to="/employee">
-            Employees
+          <Nav.Link as={Link} to="/add-employee">
+            Add Employees
           </Nav.Link>
         </Nav>
       </Container>

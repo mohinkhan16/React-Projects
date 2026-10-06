@@ -1,4 +1,5 @@
 import React from "react";
+import AddEmployee from "./components/AddEmployee";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import Error from "./ui/Error";
@@ -19,6 +20,9 @@ const App = () => {
         {
           path: "employee",
           element: <Employee />,
+        },{
+          path:"add-employee",
+          element:<AddEmployee/>
         },
       ],
     },
