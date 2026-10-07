@@ -1,6 +1,9 @@
 import React from "react";
 import AddEmployee from "./components/AddEmployee";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
 
 import Error from "./ui/Error";
 import MainLayout from "./routes/MainLayout";
@@ -12,17 +15,21 @@ const App = () => {
       path: "/",
       element: <MainLayout />,
       errorElement: <Error />,
+
       children: [
         {
           index: true,
           element: <Employee />,
         },
+
         {
           path: "employee",
           element: <Employee />,
-        },{
-          path:"add-employee",
-          element:<AddEmployee/>
+        },
+
+        {
+          path: "add-employee",
+          element: <AddEmployee />,
         },
       ],
     },
