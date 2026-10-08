@@ -5,186 +5,140 @@ import InputGroup from "react-bootstrap/InputGroup";
 import Row from "react-bootstrap/Row";
 import * as formik from "formik";
 
-import { addEmployee } from "../api/studentFetch";
-
-import validationSchema from "../validation/validation";
+import { getAllEmployee ,deleteEmployee,addEmployee } from "../API/EmployeeAxious";
 
 function FormExample() {
-    const { Formik } = formik;
+  const { Formik } = formik;
 
-    return (
-        <Formik
-            className="mt-5"
-            validationSchema={validationSchema}
-            onSubmit={(values, { resetForm }) => {
+  return (
+    <Formik
+      onSubmit={async (values, { resetForm }) => {
+        try {
+          const result = await addEmployee(values);
 
-                addEmployee(values)
-                resetForm();
+          console.log("Employee Added:", result);
 
-                if(result){
-                  navigate("/")
-                }
-            }}
-            initialValues={{
-                name: "",
-                emp_Id: 0,
-                email: "",
-                designation: "",
-                department: "",
-                salary: "",
-                status: "",
-                mobile: "",
-            }}
-        >
-            {({ handleSubmit, handleChange, values, touched, errors }) => (
-                <Form noValidate onSubmit={handleSubmit}>
-                    <Row className="mb-3">
-                        <Form.Group
-                            as={Col}
-                            md="4"
-                            controlId="validationFormik101"
-                            className="position-relative"
-                        >
-                            <Form.Label>Employee Name</Form.Label>
-                            <Form.Control
-                                type="text"
-                                name="name"
-                                value={values.name}
-                                onChange={handleChange}
-                                isValid={touched.name && !errors.name}
-                            />
-                            <Form.Control.Feedback tooltip>Looks good!</Form.Control.Feedback>
-                        </Form.Group>
-                        <Form.Group
-                            as={Col}
-                            md="4"
-                            controlId="validationFormik102"
-                            className="position-relative"
-                        >
-                            <Form.Label>Employee Id</Form.Label>
-                            <Form.Control
-                                type="number"
-                                name="emp_Id"
-                                value={values.emp_Id}
-                                onChange={handleChange}
-                                isValid={touched.emp_Id && !errors.emp_Id}
-                            />
+          resetForm();
+          alert("Employee added successfully!");
+        } catch (error) {
+          console.error("Add Employee Error:", error);
+          alert("Failed to add employee");
+        }
+      }}
+      initialValues={{
+        name: "",
+        emp_Id: "",
+        email: "",
+        designation: "",
+        department: "",
+        salary: "",
+        status: "",
+        mobile: "",
+      }}
+    >
+      {({ handleSubmit, handleChange, values }) => (
+        <Form noValidate onSubmit={handleSubmit}>
+          <Row className="mb-3">
+            <Form.Group as={Col} md="4">
+              <Form.Label>Employee Name</Form.Label>
+              <Form.Control
+                type="text"
+                name="name"
+                value={values.name}
+                onChange={handleChange}
+                placeholder="Employee Name"
+              />
+            </Form.Group>
 
-                            <Form.Control.Feedback tooltip>Looks good!</Form.Control.Feedback>
-                        </Form.Group>
-                        <Form.Group as={Col} md="4" controlId="validationFormikUsername2">
-                            <Form.Label>Email</Form.Label>
-                            <InputGroup hasValidation>
-                                <InputGroup.Text id="inputGroupPrepend">@</InputGroup.Text>
-                                <Form.Control
-                                    type="email"
-                                    placeholder="enter email"
-                                    aria-describedby="inputGroupPrepend"
-                                    name="email"
-                                    value={values.email}
-                                    onChange={handleChange}
-                                    isInvalid={!!errors.email}
-                                />
-                                <Form.Control.Feedback type="invalid" tooltip>
-                                    {errors.email}
-                                </Form.Control.Feedback>
-                            </InputGroup>
-                        </Form.Group>
-                    </Row>
-                    <Row className="mb-3">
-                        <Form.Group
-                            as={Col}
-                            md="6"
-                            controlId="validationFormik103"
-                            className="position-relative"
-                        >
-                            <Form.Label>Designation</Form.Label>
-                            <Form.Control
-                                type="text"
-                                placeholder="designation"
-                                name="designation"
-                                value={values.designation}
-                                onChange={handleChange}
-                                isInvalid={!!errors.designation}
-                            />
+            <Form.Group as={Col} md="4">
+              <Form.Label>Employee Id</Form.Label>
+              <Form.Control
+                type="number"
+                name="emp_Id"
+                value={values.emp_Id}
+                onChange={handleChange}
+                placeholder="Employee ID"
+              />
+            </Form.Group>
 
-                            <Form.Control.Feedback type="invalid" tooltip>
-                                {errors.designation}
-                            </Form.Control.Feedback>
-                        </Form.Group>
-                        <Form.Group
-                            as={Col}
-                            md="3"
-                            controlId="validationFormik104"
-                            className="position-relative"
-                        >
-                            <Form.Label>Department</Form.Label>
-                            <Form.Control
-                                type="text"
-                                placeholder="department"
-                                name="department"
-                                value={values.department}
-                                onChange={handleChange}
-                                isInvalid={!!errors.department}
-                            />
-                            <Form.Control.Feedback type="invalid" tooltip>
-                                {errors.department}
-                            </Form.Control.Feedback>
-                        </Form.Group>
-                        <Form.Group
-                            as={Col}
-                            md="3"
-                            controlId="validationFormik105"
-                            className="position-relative"
-                        >
-                            <Form.Label>Salary</Form.Label>
-                            <Form.Control
-                                type="number"
-                                placeholder="Salary"
-                                name="salary"
-                                value={values.salary}
-                                onChange={handleChange}
-                                isInvalid={!!errors.salary}
-                            />
+            <Form.Group as={Col} md="4">
+              <Form.Label>Email</Form.Label>
+              <InputGroup>
+                <InputGroup.Text>@</InputGroup.Text>
 
-                            <Form.Control.Feedback type="invalid" tooltip>
-                                {errors.salary}
-                            </Form.Control.Feedback>
-                        </Form.Group>
-                    </Row>
-                    <Form.Group className="position-relative mb-3">
-                        <Form.Label>Status</Form.Label>
-                        <Form.Control
-                            type="text"
-                            required
-                            name="status"
-                            onChange={handleChange}
-                            isInvalid={!!errors.status}
-                        />
-                        <Form.Control.Feedback type="invalid" tooltip>
-                            {errors.status}
-                        </Form.Control.Feedback>
-                    </Form.Group>
+                <Form.Control
+                  type="email"
+                  name="email"
+                  value={values.email}
+                  onChange={handleChange}
+                  placeholder="Enter email"
+                />
+              </InputGroup>
+            </Form.Group>
+          </Row>
 
-                    <Form.Group className="position-relative mb-3">
-                        <Form.Label>Mobile</Form.Label>
-                        <Form.Control
-                            type="number"
-                            required
-                            name="mobile"
-                            onChange={handleChange}
-                            isInvalid={!!errors.mobile}
-                        />
-                        <Form.Control.Feedback type="invalid" tooltip>
-                            {errors.mobile}
-                        </Form.Control.Feedback>
-                    </Form.Group>
+          <Row className="mb-3">
+            <Form.Group as={Col} md="6">
+              <Form.Label>Designation</Form.Label>
+              <Form.Control
+                type="text"
+                name="designation"
+                value={values.designation}
+                onChange={handleChange}
+                placeholder="Designation"
+              />
+            </Form.Group>
 
-                    <Button type="submit">Submit form</Button>
-                </Form>
-            )}
-        </Formik>
-    );
+            <Form.Group as={Col} md="3">
+              <Form.Label>Department</Form.Label>
+              <Form.Control
+                type="text"
+                name="department"
+                value={values.department}
+                onChange={handleChange}
+                placeholder="Department"
+              />
+            </Form.Group>
+
+            <Form.Group as={Col} md="3">
+              <Form.Label>Salary</Form.Label>
+              <Form.Control
+                type="number"
+                name="salary"
+                value={values.salary}
+                onChange={handleChange}
+                placeholder="Salary"
+              />
+            </Form.Group>
+          </Row>
+
+          <Form.Group className="mb-3">
+            <Form.Label>Status</Form.Label>
+            <Form.Control
+              type="text"
+              name="status"
+              value={values.status}
+              onChange={handleChange}
+              placeholder="Status"
+            />
+          </Form.Group>
+
+          <Form.Group className="mb-3">
+            <Form.Label>Mobile</Form.Label>
+            <Form.Control
+              type="text"
+              name="mobile"
+              value={values.mobile}
+              onChange={handleChange}
+              placeholder="Mobile"
+            />
+          </Form.Group>
+
+          <Button type="submit">Submit form</Button>
+        </Form>
+      )}
+    </Formik>
+  );
 }
 
 export default FormExample;
