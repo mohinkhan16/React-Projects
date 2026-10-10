@@ -1,4 +1,3 @@
-import React from "react";
 import AddEmployee from "./components/AddEmployee";
 import {
   createBrowserRouter,
