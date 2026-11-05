@@ -1,7 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import MainLayout from "./routes/MainLayout";
 import Employee from "./components/Employee";
-import AddEmp from "./components/AddEmp";
+import EmployeeForm from "./components/EmployeeForm";
 
 const router = createBrowserRouter([
   {
@@ -14,19 +14,19 @@ const router = createBrowserRouter([
       },
       {
         path: "add",
-        element: <AddEmp />,
+        element: <EmployeeForm />,
       },
       {
         path: "add-employee",
-        element: <AddEmp />,
+        element: <EmployeeForm />,
       },
       {
         path: "update/:id",
-        element: <AddEmp />,
+        element: <EmployeeForm />,
       },
       {
         path: "edit/:id",
-        element: <AddEmp />,
+        element: <EmployeeForm />,
       },
     ],
   },

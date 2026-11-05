@@ -1,19 +1,22 @@
-import { Outlet } from "react-router-dom";
-import Navbar from "../ui/Navbar";
 
-const MainLayout = () => {
+import { Link, Outlet } from "react-router-dom";
+
+function MainLayout() {
   return (
     <div>
-      <Navbar />
-      <main>
-        <Outlet />
-      </main>
+      <h1>Employee Management System</h1>
+
+      <nav>
+        <Link to="/">Employees</Link>
+        {" | "}
+        <Link to="/add">Add Employee</Link>
+      </nav>
+
       <hr />
-      <footer>
-        <p>© {new Date().getFullYear()} Employee Management System | All Rights Reserved</p>
-      </footer>
+
+      <Outlet />
     </div>
   );
-};
+}
 
 export default MainLayout;
