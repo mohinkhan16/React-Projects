@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # 📦 Inventory Management System
 
 A simple and interactive Inventory Management System built with React.js and Redux Toolkit.
@@ -90,3 +91,6 @@ Each product contains:
 ---
 
 ⭐ If you like this project, consider giving the repository a star!
+=======
+Live-Link:-https://react-projects-ruby-eight.vercel.app/
+>>>>>>> ecd554f491caa6688560375752b8b1ad565e6b8a
