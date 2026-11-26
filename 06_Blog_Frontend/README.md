@@ -6,6 +6,7 @@ A modern, responsive full-stack Blog Management web application built with **Rea
 
 ## 🚀 Live Demo & Links
 - **Live-Link(Vercel)**:(https://react-projects-429i-3w9c9ec9q-mohinkhans-projects.vercel.app/)
+- **Expalation-Video**:https://drive.google.com/file/d/1J4zi3L2evYv6UA-SwhKU_6C_vHDjJ-49/view?usp=drive_link
 - **Backend API (Render)**: [https://backend-projects-2-6qxi.onrender.com](https://backend-projects-2-6qxi.onrender.com)
 - **Frontend Repository**: [GitHub - React Projects](https://github.com/mohinkhan16/React-Projects)
 - **Backend Repository**: [GitHub - Backend Projects](https://github.com/mohinkhan16/Backend-Projects)
