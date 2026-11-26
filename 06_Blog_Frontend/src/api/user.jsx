@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = import.meta.env.VITE_BASE_URL;
+const BASE_URL = import.meta.env.VITE_BASE_URL || "https://backend-projects-2-6qxi.onrender.com";
 
 export async function registerUser(UserData) {
   try {
